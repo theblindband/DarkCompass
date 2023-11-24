@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "dark_compass": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "darkcompass:dark_compass"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.adventure.obtain_dark_compass.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "darkcompass:dark_compass"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.adventure.obtain_dark_compass.title"
+    }
+  },
+  "requirements": [
+    [
+      "dark_compass"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
