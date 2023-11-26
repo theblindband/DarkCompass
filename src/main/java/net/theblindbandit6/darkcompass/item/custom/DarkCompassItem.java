@@ -10,7 +10,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
@@ -18,6 +17,7 @@ import net.minecraft.util.math.GlobalPos;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.theblindbandit6.darkcompass.item.ModItems;
+import net.theblindbandit6.darkcompass.sound.ModSoundEvents;
 import org.jetbrains.annotations.Nullable;
 
 public class DarkCompassItem
@@ -38,10 +38,10 @@ public class DarkCompassItem
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         BlockPos center = user.getBlockPos();
         if(hand == Hand.MAIN_HAND){
-            world.playSound(null, center, SoundEvents.ITEM_LODESTONE_COMPASS_LOCK, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            world.playSoundFromEntity(null, user, ModSoundEvents.ITEM_DARK_COMPASS_LOCK, SoundCategory.PLAYERS, 1.0f, 0.7f);
         }
 
-        if (world.isClient() && hand == Hand.MAIN_HAND) {
+        if (hand == Hand.MAIN_HAND) {
             BlockPos darkPos = getClosestAirBlock(world, center);
 
             if (darkPos != null) {
@@ -98,7 +98,8 @@ public class DarkCompassItem
                     BlockPos pos = center.add(x, y, z);
                     if (pos.getY() > lowestBlock) {
                         BlockState state = world.getBlockState(pos);
-                        if (state.isAir() && state.getLuminance() == 0 && world.getLightLevel(LightType.BLOCK, pos) == 0 && world.getLightLevel(LightType.SKY, pos) == 0) {
+                        BlockState stateUp = world.getBlockState(pos.up());
+                        if (state.isSolidBlock(world, pos) && stateUp.isAir() && stateUp.getLuminance() == 0 && world.getLightLevel(LightType.BLOCK, pos.up()) == 0 && world.getLightLevel(LightType.SKY, pos.up()) == 0) {
                             double distance = pos.getSquaredDistance(center);
                             if (distance < closestDistance) {
                                 closestDistance = distance;
@@ -123,7 +124,8 @@ public class DarkCompassItem
                     BlockPos pos = center.add(x, y, z);
                     if (pos.getY() > lowestBlock) {
                         BlockState state = world.getBlockState(pos);
-                        if (state.isAir() && state.getLuminance() == 0 && world.getLightLevel(LightType.BLOCK, pos) == 0 && world.getLightLevel(LightType.SKY, pos) == 0) {
+                        BlockState stateUp = world.getBlockState(pos.up());
+                        if (state.isSolidBlock(world, pos) && stateUp.isAir() && stateUp.getLuminance() == 0 && world.getLightLevel(LightType.BLOCK, pos.up()) == 0 && world.getLightLevel(LightType.SKY, pos.up()) == 0) {
                             double distance = pos.getSquaredDistance(center);
                             if (distance < closestDistance) {
                                 closestDistance = distance;

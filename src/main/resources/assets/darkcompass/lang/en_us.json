@@ -3,5 +3,7 @@
   "item.darkcompass.spawner_fragment": "Spawner Fragment",
 
   "advancements.adventure.obtain_dark_compass.description": "Obtain a Dark Compass",
-  "advancements.adventure.obtain_dark_compass.title": "Nyctophobia"
+  "advancements.adventure.obtain_dark_compass.title": "Nyctophobia",
+
+  "subtitle.item.dark_compass.lock": "Dark Compass locks onto darkness"
 }

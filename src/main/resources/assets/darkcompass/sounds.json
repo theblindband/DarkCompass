@@ -1,0 +1,13 @@
+{
+  "item.dark_compass.lock": {
+    "subtitle": "subtitle.item.dark_compass.lock",
+    "sounds": [
+      {
+        "name": "darkcompass:item/dark_compass/lock1"
+      },
+      {
+        "name": "darkcompass:item/dark_compass/lock2"
+      }
+    ]
+  }
+}
